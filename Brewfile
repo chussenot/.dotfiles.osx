@@ -15,6 +15,7 @@ brew 'vim'
 brew 'wget'
 brew 'zsh'
 brew 'youtube-dl'
+brew 'mplayer'
 
 # casks
 tap 'caskroom/cask'
