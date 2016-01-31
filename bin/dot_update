@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# dot_update
+#
+# `dot_update` handles installation, updates, things like that. Run it
+# periodically to make sure you're on the latest and greatest.
+export ZSH="$HOME/.dotfiles"
+
+# Set OS defaults
+"$ZSH/osx/set-defaults.sh"
+
+# Install homebrew
+"$ZSH/homebrew/install.sh" 2>&1
+
+# Upgrade homebrew
+echo "› brew update"
+brew update
+
+# Upgrade nvm
+echo "› update nvm"
+cd "$NVM_DIR" && git pull origin master && git checkout `git describe --abbrev=0 --tags`
+
+# Install software
+echo "› $ZSH/script/install"
+"$ZSH/script/install"
