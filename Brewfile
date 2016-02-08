@@ -16,6 +16,7 @@ brew 'wget'
 brew 'zsh'
 brew 'youtube-dl'
 brew 'mplayer'
+brew 'tutum'
 
 # casks
 tap 'caskroom/cask'
