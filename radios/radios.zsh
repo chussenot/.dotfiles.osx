@@ -1,0 +1,7 @@
+alias radio-franceinfo="mplayer http://audio.scdn.arkena.com/11006/franceinfo-midfi128.mp3"
+alias radio-francemusique="mplayer http://audio.scdn.arkena.com/11012/francemusique-midfi128.mp3"
+alias radio-franceinter="mplayer http://audio.scdn.arkena.com/11008/franceinter-midfi128.mp3"
+alias radio-franceculture="mplayer http://audio.scdn.arkena.com/11010/franceculture-midfi128.mp3"
+alias radio-nova="mplayer http://broadcast.infomaniak.net/radionova-high.mp3"
+alias radio-fip="mplayer http://audio.scdn.arkena.com/11016/fip-midfi128.mp3"
+alias radio-rtl2="mplayer http://streaming.radio.rtl.fr/rtl2-1-44-64.mp3"
