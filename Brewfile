@@ -17,6 +17,8 @@ brew 'zsh'
 brew 'youtube-dl'
 brew 'mplayer'
 brew 'tutum'
+brew 'graphviz'
+brew 'amazon-ecs-cli'
 
 # casks
 tap 'caskroom/cask'
