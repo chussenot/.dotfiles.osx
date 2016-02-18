@@ -6,10 +6,11 @@ Config files for ZSH, Ruby, Go, Terminals and more.
 
 Run this:
 
-```sh
+```console
 git clone https://github.com/chussenot/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 script/bootstrap
+chsh -s $(which zsh)
 ```
 
 This will symlink the appropriate files in `.dotfiles` to your home directory.
