@@ -22,6 +22,7 @@ brew 'mplayer'
 brew 'tutum'
 brew 'amazon-ecs-cli'
 brew 'rlwrap'
+brew 'terraform'
 
 # casks
 tap 'caskroom/cask'
