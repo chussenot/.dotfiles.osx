@@ -23,6 +23,7 @@ brew 'tutum'
 brew 'amazon-ecs-cli'
 brew 'rlwrap'
 brew 'terraform'
+brew 'vault'
 
 # casks
 tap 'caskroom/cask'
