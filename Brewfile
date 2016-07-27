@@ -24,6 +24,7 @@ brew 'amazon-ecs-cli'
 brew 'rlwrap'
 brew 'terraform'
 brew 'vault'
+brew 'pwgen'
 
 # casks
 tap 'caskroom/cask'
