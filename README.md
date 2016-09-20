@@ -7,7 +7,7 @@ Config files for ZSH, Ruby, Go, Terminals and more.
 Run this:
 
 ```console
-git clone https://github.com/chussenot/dotfiles.git ~/.dotfiles
+git clone https://github.com/chussenot/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 script/bootstrap
 chsh -s $(which zsh)
