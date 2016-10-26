@@ -25,6 +25,7 @@ brew 'rlwrap'
 brew 'terraform'
 brew 'vault'
 brew 'pwgen'
+brew 'elixir'
 
 # casks
 tap 'caskroom/cask'
