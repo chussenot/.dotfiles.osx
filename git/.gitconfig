@@ -1,0 +1,155 @@
+[user]
+  name = Clement Hussenot
+  email = chussenot@gmail.com
+
+[core]
+  excludesfile = /Users/chussenot/.gitignore_global
+
+[diff]
+  color = true
+
+[alias]
+  ; shortcuts
+  st  = status
+  a   = add
+  ap  = add -p
+  ci  = commit
+  b   = branch -vvv
+  br  = branch
+  co  = checkout
+  rso = remote show origin
+  ca  = commit --reuse-message=HEAD
+  cia = commit --reedit-message=HEAD
+  rbc = rebase --continue
+  mt  = mergetool
+  fa  = fetch --all
+  pr  = pull --rebase
+  pa  = pull --all
+
+  cpk = cherry-pick
+
+  d   = diff
+  ds  = diff --staged
+  wd  = diff --word-diff
+
+  ; log aliases
+  logp    = log -v --graph -p
+  lg      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches=*
+  lgs     = log --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches=*
+  ll      = log ORIG_HEAD..HEAD --pretty=oneline
+
+  ;; my commits
+  mylogp = "!git logp --author=\"`git config --get user.name`\""
+  mylg = "!git lg --author=\"`git config --get user.name`\""
+  mylgs = "!git lgs --author=\"`git config --get user.name`\""
+
+  ; all new commits after you fetched, with stats, but excluding merges
+  lc = log ORIG_HEAD.. --stat --no-merges
+
+  msg     = commit --allow-empty -m
+  unstage = reset HEAD --
+  u       = reset HEAD --
+  last    = log -1 HEAD
+  visual  = !qgit4
+
+  ; Simple diff wrappers
+  changes  = diff --name-status -r
+  diffstat = diff --stat -r
+
+  ; Spelunking of the project's history 
+  whois  = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+  whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+
+  ; list aliases
+  aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
+
+  ; Editing/adding conflicted files 
+  edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+  add-unmerged  = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+
+  ; List ignored files
+  ls-ignored = ls-files --exclude-standard --ignored --others
+  ; List untracked files
+  ls-untracked = ls-files --others --exclude-standard
+  # List modified files
+  ls-modified = ls-files --modified
+
+  open-untracked = !git ls-untracked | xargs gvim --remote-tab
+
+  open-modified = !git ls-modified | xargs gvim --remote-tab
+
+  irb = rebase --interactive
+
+  undo = reset --soft HEAD^
+
+
+;[apply]
+  ;whitespace = nowarn
+
+[color]
+  branch      = auto
+  diff        = auto
+  status      = auto
+  interactive = auto
+  ui          = auto
+  pager       = true
+
+[color "branch"]
+  current = yellow reverse
+  local   = yellow
+  remote  = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old  = red bold
+  new  = green bold
+
+[color "status"]
+  added     = yellow
+  changed   = green
+  untracked = cyan
+
+[merge]
+  tool = meld
+  stat = true
+
+[merge "bundleinstall"]
+  name   = bundle install
+  driver = bundle install
+
+[diff "zip"]
+  textconv = unzip -c -a
+
+[diff "jpg"]
+  textconv      = exiftool
+  cachetextconv = true
+
+[core]
+  editor = vim
+  pager  = less -FRSX
+
+[push]
+  default = tracking
+
+[branch]
+  ; When a new branch is created with git branch or git checkout that tracks
+  ; another branch, this variable tells git to set up pull to rebase instead of
+  ; merge (see "branch.<name>.rebase"). When never, rebase is never automatically
+  ; set to true. When local, rebase is set to true for tracked branches of other
+  ; local branches. When remote, rebase is set to true for tracked branches of
+  ; remote-tracking branches. When always, rebase will be set to true for all
+  ; tracking branches.
+  autosetuprebase = remote
+
+
+# See http://robots.thoughtbot.com/post/27695057156/clone-me-maybe
+[url "git://github.com/"]
+  # Read-only
+  insteadOf = gh:
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[user]
+	name = Clement Hussenot
+	email = chussenot@gmail.com
