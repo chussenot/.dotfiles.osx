@@ -26,6 +26,7 @@ brew 'terraform'
 brew 'vault'
 brew 'pwgen'
 brew 'elixir'
+brew 'pyenv'
 
 # casks
 tap 'caskroom/cask'
