@@ -39,6 +39,9 @@ There's a few special files in the hierarchy.
 - **topic/install.sh**: Any file with this name and with exec permission, will
 ran at bootstrap phase.
 
+## tmux
+`cd ~ && ln -s .dotfiles/.tmux.conf`
+
 ## thanks
 
 I forked caarlos0 [dotfiles](https://github.com/caarlos0/dotfiles)
