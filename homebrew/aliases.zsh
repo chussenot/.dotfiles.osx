@@ -8,7 +8,7 @@ brew() {
       ;;
     bump)
       command brew update
-      command brew upgrade --all
+      command brew upgrade
       brew cleanup
       ;;
     *)
