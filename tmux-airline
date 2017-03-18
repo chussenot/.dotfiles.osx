@@ -1,0 +1,6 @@
+#!/bin/sh
+
+DATE="#[fg=green,nobold,noitalics,nounderscore] $(date +'%D')"
+TIME="#[fg=green,nobold,noitalics,nounderscore] $(date +'%H:%M:%S')"
+
+echo "$DATE |$TIME"
