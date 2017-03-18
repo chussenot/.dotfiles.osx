@@ -74,7 +74,13 @@ alias ez='vim ~/.zshrc'
 # export ZSH_TMUX_AUTOSTART=true
 # export ZSH_TMUX_AUTOCONNECT=true
 # if [ -z $TMUX ]; then; tmux attach || tmux new; fi
+# create a global per-pane variable that holds the pane's PWD
 
 # Python
 export PATH=/usr/local/share/python:$PATH
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
+
+export PATH=/usr/local/opt/openssl/bin:$PATH
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export LDFLAGS=-L/usr/local/opt/openssl/lib
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
