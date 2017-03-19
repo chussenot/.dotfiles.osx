@@ -107,10 +107,10 @@ set -g window-status-current-attr bold
 
 set -g status-fg colour231
 set -g status-bg colour234
-set -g status-left "#[fg=green] #(~/tmux-left)"
+set -g status-left "#[fg=green] #(~/.tmux-left)"
 set -g status-left-length 30
 
-set -g status-right '#(eval ~/tmux-airline `tmux display -p "#{client_width}"`)'
+set -g status-right '#(eval ~/.tmux-airline `tmux display -p "#{client_width}"`)'
 set -g status-right-length 150
 set -g status-interval 1
 
