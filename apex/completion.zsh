@@ -8,4 +8,6 @@ _apex()  {
   return 0
 }
 
-complete -F _apex apex
+if hash apex 2>/dev/null; then
+  complete -F _apex apex
+fi
