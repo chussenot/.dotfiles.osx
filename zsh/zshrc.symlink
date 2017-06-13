@@ -1,28 +1,28 @@
 #!/bin/zsh
-# shortcut to this dotfiles path is $ZSH
+# Shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
-# your project folder that we can `c [tab]` to
+# Your project folder that we can `c [tab]` to
 export PROJECTS=~/Sites/d2si
 
-# all of our zsh files
+# All of our zsh files
 typeset -U config_files
 config_files=($ZSH/*/*.zsh)
 
-# load the path files
+# Load the path files
 for file in ${(M)config_files:#*/path.zsh}; do
   source "$file"
 done
 
-# load everything but the path and completion files
+# Load everything but the path and completion files
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
   source "$file"
 done
 
-# initialize autocomplete here, otherwise functions won't be loaded
+# Initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit && compinit
 
-# load every completion after autocomplete loads
+# Load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
   source "$file"
 done
@@ -32,7 +32,7 @@ unset config_files
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# source private commands
+# Source private commands
 if [ -f ~/.localrc ]; then
   source ~/.localrc
 fi
@@ -56,14 +56,15 @@ if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then
   source "${HOME}/google-cloud-sdk/completion.zsh.inc"
 fi
 
-# added by travis gem
+# Added by travis gem
 [ -f ${HOME}/.travis/travis.sh ] && source ${HOME}/.travis/travis.sh
 
-# convenience aliases for editing configs
+# Convenience aliases for editing configs
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
 
+# Editor
 export EDITOR=nvim
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
@@ -71,17 +72,12 @@ alias ev='vim ~/.vimrc'
 alias et='vim ~/.tmux.conf'
 alias ez='vim ~/.zshrc'
 
-# export ZSH_TMUX_AUTOSTART=true
-# export ZSH_TMUX_AUTOCONNECT=true
-# if [ -z $TMUX ]; then; tmux attach || tmux new; fi
-# create a global per-pane variable that holds the pane's PWD
-
-# Python
-export PATH=/usr/local/share/python:$PATH
-export PYTHON_CONFIGURE_OPTS="--enable-shared"
-
-export PATH=/usr/local/opt/openssl/bin:$PATH
+# OpenSSL
 export CPPFLAGS=-I/usr/local/opt/openssl/include
 export LDFLAGS=-L/usr/local/opt/openssl/lib
 export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+
+# Path
+export PATH=/usr/local/share/python:$PATH
+export PATH=/usr/local/opt/openssl/bin:$PATH
 export PATH="$HOME/.tfenv/bin:$PATH"
