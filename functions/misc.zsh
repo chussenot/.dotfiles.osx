@@ -32,3 +32,30 @@ function httpserver-ngrok() {
   local port="${1:-8000}";
   ngrok http ${port}
 }
+
+function git-add-repo
+{
+    repo="$1"
+    dir="$(echo "$2" | sed 's/\/$//')"
+    path="$(pwd)"
+
+    tmp="$(mktemp -d)"
+    remote="$(echo "$tmp" | sed 's/\///g'| sed 's/\./_/g')"
+
+    git clone "$repo" "$tmp"
+    cd "$tmp"
+
+    git filter-branch --index-filter '
+        git ls-files -s |
+        sed "s,\t,&'"$dir"'/," |
+        GIT_INDEX_FILE="$GIT_INDEX_FILE.new" git update-index --index-info &&
+        mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"
+    ' HEAD
+
+    cd "$path"
+    git remote add -f "$remote" "file://$tmp/.git"
+    git pull "$remote/master"
+    git merge --allow-unrelated-histories -m "Merge repo $repo into master" --edit "$remote/master"
+    git remote remove "$remote"
+    rm -rf "$tmp"
+  }
