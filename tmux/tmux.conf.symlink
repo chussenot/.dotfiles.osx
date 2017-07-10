@@ -121,14 +121,33 @@ if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
 #####
 # Tmux plugins manager
 
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-battery'
-set -g @plugin 'tmux-plugins/tmux-cpu'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
+# Load plugins
+set-option -g @tpm_plugins '       \
+  tmux-plugins/tpm                 \
+  tmux-plugins/tmux-continuum      \
+  tmux-plugins/tmux-cpu            \
+  tmux-plugins/tmux-battery        \
+  tmux-plugins/tmux-copycat        \
+  tmux-plugins/tmux-fpp            \
+  tmux-plugins/tmux-logging        \
+  tmux-plugins/tmux-open           \
+  tmux-plugins/tmux-pain-control   \
+  tmux-plugins/tmux-resurrect      \
+  tmux-plugins/tmux-sensible       \
+  tmux-plugins/tmux-sessionist     \
+  tmux-plugins/tmux-sidebar        \
+  tmux-plugins/tmux-yank           \
+'
 
-# Continuum
-set -g @continuum-restore
+set-option -g @resurrect-processes 'ssh'
+set-option -g @resurrect-strategy-nvim 'session'
 
-run '~/.tmux/plugins/tpm/tpm'
+# Enable tmux automatic start
+set-option -g @continuum-restore 'on'
+set-option -g @continuum-save-interval '10'
+set-option -g @continuum-boot 'on'
+set-option -g @continuum-boot-options 'iterm'
 
+# Initializes TMUX plugin manager.
+# Keep this line at the very bottom of tmux.conf.
+run-shell '~/.tmux/plugins/tpm/tpm'
