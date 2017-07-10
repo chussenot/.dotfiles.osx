@@ -81,3 +81,9 @@ export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 export PATH=/usr/local/share/python:$PATH
 export PATH=/usr/local/opt/openssl/bin:$PATH
 export PATH="$HOME/.tfenv/bin:$PATH"
+
+# History
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help:vplay *:pirate-get *";
+
+test -e "${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+  && source "${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
