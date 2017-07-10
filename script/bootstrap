@@ -108,7 +108,7 @@ install_dotfiles () {
 install_dotfiles
 
 info "installing dependencies"
-if ./bin/dot_update > /tmp/dotfiles-dot 2>&1; then
+if ./script/update > /tmp/dotfiles-dot 2>&1; then
   success "dependencies installed"
 else
   fail "error installing dependencies"

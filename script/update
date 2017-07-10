@@ -1,8 +1,8 @@
 #!/bin/sh
 #
-# dot_update
+# update
 #
-# `dot_update` handles installation, updates, things like that. Run it
+# `update` handles installation, updates, things like that. Run it
 # periodically to make sure you're on the latest and greatest.
 export ZSH="$HOME/.dotfiles"
 
@@ -12,14 +12,13 @@ export ZSH="$HOME/.dotfiles"
 # Install homebrew
 "$ZSH/homebrew/install.sh" 2>&1
 
-# Upgrade homebrew
-echo "› brew update"
-brew update
+# Install software
+echo "› $ZSH/script/install"
+"$ZSH/script/install"
 
 # Upgrade nvm
 echo "› update nvm"
 cd "$NVM_DIR" && git pull origin master && git checkout `git describe --abbrev=0 --tags`
 
-# Install software
-echo "› $ZSH/script/install"
-"$ZSH/script/install"
+# Upgrade apex
+apex upgrade
