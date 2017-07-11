@@ -2,6 +2,6 @@
 ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom"
 ZSH_THEME="chussenot"
 
-plugins=(hub composer git sudo tmux tmuxinator rails ruby gem aws bower bundler brew-cask brew capistrano coffee docker emacs git-extras github heroku lein node npm nyan osx pip pod python redis-cli vagrant terraform scala sbt z docker-compose gradle mvn ng pass perl tig web-search catimg)
+plugins=(git sudo tmux tmuxinator ruby gem aws bower bundler brew-cask brew coffee docker git-extras lein node npm osx pip python terraform scala sbt z docker-compose gradle mvn ng pass perl tig)
 
 source $ZSH/oh-my-zsh.sh
