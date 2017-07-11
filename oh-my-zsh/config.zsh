@@ -1,5 +1,6 @@
 # http://blog.ysmood.org/my-ys-terminal-theme/
-ZSH_THEME="ys"
+ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/custom"
+ZSH_THEME="chussenot"
 
 plugins=(hub composer git sudo tmux tmuxinator rails ruby gem aws bower bundler brew-cask brew capistrano coffee docker emacs git-extras github heroku lein node npm nyan osx pip pod python redis-cli vagrant terraform scala sbt z docker-compose gradle mvn ng pass perl tig web-search catimg)
 
