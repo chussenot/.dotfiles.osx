@@ -16,7 +16,7 @@ chsh -s $(which zsh)
 This will symlink the appropriate files in `.dotfiles` to your home directory.
 Everything is configured and tweaked within `~/.dotfiles`.
 
-## hierarchy
+## Hierarchy
 
 There's a few special files in the hierarchy.
 
@@ -38,4 +38,35 @@ There's a few special files in the hierarchy.
   symlinked in when you run `script/bootstrap`.
 - **topic/install.sh**: Any file with this name and with exec permission, will
 ran at bootstrap phase.
+
+## Add custom commands without creating a new fork
+
+If ``~/.localrc`` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+
+My ``~/.localrc`` looks something like this:
+
+    # Git credentials
+    git config --global user.name "Clement Hussenot"
+    git config --global user.email "chussenota@gmail.com"
+
+    # Go environment
+    export GOROOT=/usr/local/go
+    export GOPATH=$HOME/Projects/gocode
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+You can overwrite something using ``~/.localrc``. For example:
+
+    alias p="cd ~/Documents/Projects"
+
+    # Overwrite environment variable
+    export EDITOR="neovim"
+
+Or you can extend all your dotfiles configuration using ``~/.localrc`` like entry point. Your ``~/.localrc`` can be like this:
+
+    for file in ~/.extra/.zsh/{local-exports,local-aliases,local-work-settings}.zsh; do
+        [ -r "$file" ] && source "$file"
+    done
+    unset file
+
+And in ``~/.extra/.zsh/local-exports.zsh``, ``~/.extra/.zsh/local-aliases.zsh``, ``~/.extra/.zsh/local-work-settings.zsh`` you can add your own custom commands.
 
