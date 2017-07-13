@@ -1,3 +1,8 @@
+TMUX_LSEP=''
+TMUX_LSEPE=''
+TMUX_RSEP=''
+TMUX_RSEPE=''
+
 # General options
 set -g default-terminal "xterm-256color"
 
@@ -78,6 +83,13 @@ bind-key ^P previous-window
 # ^\ (no prefix) to skip to last window we were in before this one
 bind -n "^\\" last-window
 
+# Quick session selection
+bind -r C-k switch-client -p
+bind -r C-j switch-client -n
+
+# Maximize panes
+bind-key | resize-pane -Z \; display-message "Zoom/unzoom"
+
 # Pane resize in all four directions using vi bindings.
 # Can use these raw but I map them to Cmd-Opt-<h,j,k,l> in iTerm2.
 # http://tangledhelix.com/blog/2012/04/28/iterm2-keymaps-for-tmux/
@@ -107,12 +119,35 @@ set -g window-status-current-attr bold
 
 set -g status-fg colour231
 set -g status-bg colour234
-set -g status-left "#[fg=green] #(~/.tmux-left)"
+set -g status-left "#[fg=yellow] #(~/.tmux-left)"
 set -g status-left-length 30
 
 set -g status-right '#(eval ~/.tmux-airline `tmux display -p "#{client_width}"`) | Batt: #{battery_percentage} - #{battery_remain} | CPU:#{cpu_percentage}'
 set -g status-right-length 150
-set -g status-interval 1
+set -g status-interval 5
+# Center the status bar
+set -g status-justify left
+
+###########################
+# Colors
+###########################
+
+# Color status bar
+set -g status-bg colour236
+set -g status-fg white
+
+# Highlight activity alert window
+setw -g window-status-activity-fg colour236
+setw -g window-status-activity-bg yellow
+
+setw -g window-style 'bg=colour18'
+setw -g window-active-style 'bg=black'
+
+# Set color of active pane
+set -g pane-border-fg colour236
+set -g pane-border-bg colour236
+set -g pane-active-border-fg green
+set -g pane-active-border-bg colour237
 
 #####
 
@@ -137,6 +172,7 @@ set-option -g @tpm_plugins '       \
   tmux-plugins/tmux-sessionist     \
   tmux-plugins/tmux-sidebar        \
   tmux-plugins/tmux-yank           \
+  nhdaly/tmux-better-mouse-mode    \
 '
 
 set-option -g @resurrect-processes 'ssh'
@@ -147,6 +183,12 @@ set-option -g @continuum-restore 'on'
 set-option -g @continuum-save-interval '10'
 set-option -g @continuum-boot 'on'
 set-option -g @continuum-boot-options 'iterm'
+set-option -g @scroll-speed-num-lines-per-scroll 2
+set-option -g @emulate-scroll-for-no-mouse-alternate-buffer 'on'
+
+# === !! Auto-install tpm if it hasn't been installed already !! ===
+if "test ! -d ~/.tmux/plugins/tpm" \
+     "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
 
 # Initializes TMUX plugin manager.
 # Keep this line at the very bottom of tmux.conf.
