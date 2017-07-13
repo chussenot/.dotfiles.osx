@@ -1,10 +1,7 @@
 #!/bin/sh
-__reload_dotfiles() {
-  PATH="$(command -p getconf PATH):/usr/local/bin"
-  . ~/.zshrc
-  cd .
-}
-alias reload!='__reload_dotfiles'
+
+## reload all
+alias reload!='exec "$SHELL" -l'
 
 ## create parent directories on demand
 alias mkdir='mkdir -pv'
