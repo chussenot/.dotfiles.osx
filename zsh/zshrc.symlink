@@ -10,9 +10,8 @@ fi
 
 # Shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
-
-# Your project folder that we can `c [tab]` to
-export PROJECTS=~/Sites/d2si
+# shortcut to this dotfiles path is $DOTFILES
+export DOTFILES=$HOME/.dotfiles
 
 # All of our zsh files
 typeset -U config_files
@@ -29,22 +28,20 @@ for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
 done
 
 # Initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit && compinit
+autoload -Uz compinit
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit -i
+else
+  compinit -C -i
+fi
 
-# Load every completion after autocomplete loads
+# load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
   source "$file"
 done
 
-unset config_files
-
-# Enable aliases to be sudo’ed
-alias sudo='sudo '
-
-# Source private commands
-if [ -f ~/.localrc ]; then
-  source ~/.localrc
-fi
+unset config_files updated_at
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 export PATH="/usr/local/sbin:$PATH"
@@ -56,13 +53,12 @@ if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then
   source "${HOME}/google-cloud-sdk/path.zsh.inc"
 fi
 
+# Editor
 # Convenience aliases for editing configs
 if type nvim > /dev/null 2>&1; then
+  export EDITOR=nvim
   alias vim='nvim'
 fi
-
-# Editor
-export EDITOR=nvim
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 alias ev='vim ~/.vimrc'
@@ -85,6 +81,14 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 export PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# Source private commands
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+if [ -f ~/.localrc ]; then
+  source ~/.localrc
+fi
+
+# Profiling END
 # Entirety of my startup file... then
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace

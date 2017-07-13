@@ -13,10 +13,11 @@ alias mkdir='mkdir -pv'
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 
+# clear your terminal
 alias c='clear'
 
 ## make you look all busy and fancy in the eyes of non-technical people.
 alias busy="cat /dev/urandom | hexdump -C | grep "ca fe""
 
-## nethack game
-alias nethack='telnet -e ^c nethack.alt.org'
+# enable aliases to be sudo’ed
+alias sudo='sudo '
