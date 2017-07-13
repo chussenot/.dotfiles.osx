@@ -56,11 +56,6 @@ if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then
   source "${HOME}/google-cloud-sdk/path.zsh.inc"
 fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then
-  source "${HOME}/google-cloud-sdk/completion.zsh.inc"
-fi
-
 # Convenience aliases for editing configs
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
@@ -95,5 +90,3 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
 fi
-
-
