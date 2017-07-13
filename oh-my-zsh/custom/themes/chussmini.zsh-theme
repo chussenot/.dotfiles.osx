@@ -3,24 +3,14 @@
 local check_mark='\xE2\x9C\x94'
 local x_mark='\xE2\x9C\x98'
 
-# User info.
-function prompt_user(){
-    echo "%{$fg[cyan]%}%n"
-}
-
-# Machine info.
-function prompt_machine(){
-    echo "%{$fg[green]%}%m"
-}
-
 # Directory info.
 function prompt_dir(){
-    echo "%{$fg_bold[yellow]%}${PWD/#$HOME/~}%{$reset_color%}"
+    echo "%{$fg[cyan]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
 # Git info
 function prompt_git(){
-    ZSH_THEME_GIT_PROMPT_PREFIX="git:%{$fg[cyan]%}"
+    ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
     ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}$x_mark"
     ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}$check_mark"
@@ -32,7 +22,7 @@ function prompt_pyenv(){
     if which pyenv &>/dev/null; then
         local pyenv_version="$(pyenv version-name)"
         if [[ "$pyenv_version" != "system" ]]; then
-            echo "python:%{${fg[yellow]}%}$pyenv_version%{$reset_color%}"
+            echo "py-%{${fg[cyan]}%}$pyenv_version%{$reset_color%}"
         fi
     fi
 }
@@ -42,7 +32,7 @@ function prompt_rbenv(){
     if which rbenv &>/dev/null; then
         local rbenv_version="$(rbenv version-name)"
         if [[ "$rbenv_version" != "system" ]]; then
-            echo "ruby:%{${fg[yellow]}%}$rbenv_version%{$reset_color%}"
+            echo "rb-%{${fg[cyan]}%}$rbenv_version%{$reset_color%}"
         fi
     fi
 }
@@ -50,7 +40,7 @@ function prompt_rbenv(){
 # Aws profile
 function prompt_aws_profile(){
     if [[ -n  "$AWS_PROFILE" ]]; then
-        echo "aws:%{${fg[yellow]}%}$AWS_PROFILE%{$reset_color%}"
+        echo "aws-%{${fg[cyan]}%}$AWS_PROFILE%{$reset_color%}"
     fi
 }
 
@@ -58,7 +48,7 @@ function prompt_aws_profile(){
 function prompt_tfenv(){
     if which tfenv &>/dev/null; then
         local tfenv_version="$(tfenv version-name)"
-        echo "tf:%{${fg[yellow]}%}$tfenv_version%{$reset_color%}"
+        echo "tf-%{${fg[cyan]}%}$tfenv_version%{$reset_color%}"
     fi
 }
 
@@ -71,8 +61,10 @@ prompt_nvm() {
   else
     nvm_prompt="$(node --version)"
   fi
-  nvm_prompt=${nvm_prompt}
-  echo "node:%{${fg[yellow]}%}$nvm_prompt%{$reset_color%}"
+  if [[ "$nvm_prompt" != "system" ]]; then
+    nvm_prompt=${nvm_prompt}
+    echo "nd-%{${fg[yellow]}%}$nvm_prompt%{$reset_color%}"
+  fi
 }
 
 # Assemble additional info
@@ -82,12 +74,13 @@ function prompt_additional(){
         "$(prompt_git)" \
         "$(prompt_rbenv)" \
         "$(prompt_nvm)" \
+        "$(prompt_pyenv)" \
         "$(prompt_tfenv)" \
         "$(prompt_aws_profile)" \
     )
     array=(${array[@]})
     if [[ $#array != 0 ]]; then
-        echo "%{$reset_color%}on ${(pj:, :)array} "
+        echo "%{$reset_color%}${(pj: • :)array} "
     fi
 }
 
@@ -101,13 +94,4 @@ function prompt_status(){
     fi
 }
 
-# Main prompt
-# Format: \n # USER at MACHINE in DIRECTORY on [git/hg] [pyenv] [rbenv] [TIME] \n $
-PROMPT='
-%{$fg[cyan]%}#%{$reset_color%} \
-$(prompt_user) \
-%{$reset_color%}in \
-$(prompt_dir) \
-$(prompt_additional)\
-%{$reset_color%}
-$(prompt_status)'
+PROMPT='$(prompt_status)$(prompt_additional)$(prompt_dir) '
