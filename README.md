@@ -2,7 +2,11 @@
 
 Config files for ZSH, Ruby, Go, Terminals and more.
 
-## install
+## Screenshots
+
+![screenshot](./screenshot.png)
+
+## Install
 
 Run this:
 
