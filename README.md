@@ -51,7 +51,7 @@ My ``~/.localrc`` looks something like this:
 
     # Git credentials
     git config --global user.name "Clement Hussenot"
-    git config --global user.email "chussenota@gmail.com"
+    git config --global user.email "chussenot@gmail.com"
 
     # Go environment
     export GOROOT=/usr/local/go
