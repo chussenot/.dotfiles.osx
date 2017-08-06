@@ -11,7 +11,7 @@ RADIO=$(whiptail --title "Radios!" --menu "Choose your option" 10 60 4 \
 "mouv" "" 3>&1 1>&2 2>&3)
 
 france_info() {
-  mplayer http://direct.franceinfo.fr/live/franceinfo-midfi.mp3
+  mplayer http://direct.franceinfo.fr/live/franceinfo-midfi.mp3 &> /dev/null
 }
 france_musique() {
   mplayer http://direct.francemusique.fr/live/francemusique-midfi.mp3
