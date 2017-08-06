@@ -59,3 +59,7 @@ function git-add-repo
     git remote remove "$remote"
     rm -rf "$tmp"
   }
+
+  function generate_pass() {
+    openssl rand -base64 $1
+  }
