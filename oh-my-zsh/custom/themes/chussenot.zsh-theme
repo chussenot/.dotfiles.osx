@@ -51,6 +51,8 @@ function prompt_rbenv(){
 function prompt_aws_profile(){
     if [[ -n  "$AWS_PROFILE" ]]; then
         echo "aws:%{${fg[yellow]}%}$AWS_PROFILE%{$reset_color%}"
+    else
+        echo "aws:%{${fg[yellow]}%}default%{$reset_color%}"
     fi
 }
 
