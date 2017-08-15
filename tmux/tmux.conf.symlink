@@ -1,7 +1,8 @@
-TMUX_LSEP=''
-TMUX_LSEPE=''
-TMUX_RSEP=''
-TMUX_RSEPE=''
+TMUX_UNAME="#H"
+TMUX_LOCALIP="#(ipconfig getifaddr en0 || echo 'No connection')"
+TMUX_DATE="%a %Y-%m-%d"
+TMUX_TIME="%H:%M"
+GRAPH="⚡"
 
 # General options
 set -g default-terminal "xterm-256color"
@@ -42,9 +43,12 @@ set-option -g display-panes-colour colour196 #orange
 # clock
 set-window-option -g clock-mode-colour colour40 #green
 
-# Count windows and panes from 1
+# Set the base index for windows to 1 instead of 0
 set -g base-index 1
+# Set the base index for panes to 1 instead of 0
 setw -g pane-base-index 1
+# Re-number windows when one is closed
+set -g renumber-windows on
 
 # Setting the prefix from C-b to C-a
 set -g prefix C-a
@@ -116,15 +120,20 @@ set-option -g default-shell /bin/zsh
 set -g window-status-current-bg white
 set -g window-status-current-fg black
 set -g window-status-current-attr bold
+set-window-option -g window-status-current-format ' #W '
+set-window-option -g window-status-format ' #W '
 
 set -g status-fg colour231
 set -g status-bg colour234
-set -g status-left "#[fg=yellow] #(~/.tmux-left)"
-set -g status-left-length 30
+set -g status-left "#(~/.tmux-left)"
+set -g status-left-length 40
 
-set -g status-right '#(eval ~/.tmux-airline `tmux display -p "#{client_width}"`) | Batt: #{battery_percentage} - #{battery_remain} | CPU:#{cpu_percentage}'
+set -g status-right "#[fg=yellow] $GRAPH #{battery_percentage} #[fg=white] $TMUX_DATE #[fg=cyan] $TMUX_TIME"
 set -g status-right-length 150
+
+# Set refresh interval for status bar (refresh every 1 seconds)
 set -g status-interval 5
+
 # Center the status bar
 set -g status-justify left
 
@@ -133,7 +142,7 @@ set -g status-justify left
 ###########################
 
 # Color status bar
-set -g status-bg colour236
+set -g status-bg black
 set -g status-fg white
 
 # Highlight activity alert window

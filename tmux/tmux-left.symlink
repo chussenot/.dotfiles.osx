@@ -1,2 +1,4 @@
 #!/bin/sh
-echo "TMUX | "
+
+TMUX_SESSION_INFO="#S"
+echo "#[fg=cyan] $TMUX_SESSION_INFO "
