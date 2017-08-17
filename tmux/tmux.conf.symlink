@@ -20,11 +20,6 @@ set -g xterm-keys on
 bind-key ^D detach-client
 bind-key ^C new-window
 
-# Use vi keybindings in copy and choice modes
-setw -g mode-keys vi
-
-# Reload tmux config
-# bind r source-file ~/.tmux.conf; display "Reloaded"
 
 # pane border
 set-option -g pane-active-border-fg black
