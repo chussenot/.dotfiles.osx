@@ -10,6 +10,7 @@ brew() {
       command brew update
       command brew upgrade
       brew cleanup
+      brew cu # https://github.com/buo/homebrew-cask-upgrade
       ;;
     *)
       command brew "$@"
