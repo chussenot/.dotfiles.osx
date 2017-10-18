@@ -64,6 +64,14 @@ function prompt_tfenv(){
     fi
 }
 
+# Terragrunt info
+function prompt_tgenv(){
+    if which tgenv &>/dev/null; then
+        local tgenv_version="$(tgenv version-name)"
+        echo "tg:%{${fg[yellow]}%}$tgenv_version%{$reset_color%}"
+    fi
+}
+
 # NVM: Node version manager
 prompt_nvm() {
   local nvm_prompt
@@ -85,6 +93,7 @@ function prompt_additional(){
         "$(prompt_rbenv)" \
         "$(prompt_nvm)" \
         "$(prompt_tfenv)" \
+        "$(prompt_tgenv)" \
         "$(prompt_aws_profile)" \
     )
     array=(${array[@]})
