@@ -158,8 +158,6 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # disable iTunes fuckin helper
 sudo mv /Applications/iTunes.app/Contents/MacOS/iTunesHelper.app{,-disabled} &>/dev/null
-# stop play button from launching iTunes
-launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist
 
 #
 # Kill related apps

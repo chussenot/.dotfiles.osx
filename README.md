@@ -6,6 +6,10 @@ Config files for ZSH, Ruby, Go, Terminals and more.
 
 ![screenshot](./screenshot.png)
 
+## Dependencies
+
+- make (optional)
+
 ## Install
 
 Run this:
@@ -13,7 +17,7 @@ Run this:
 ```console
 git clone https://github.com/chussenot/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-script/bootstrap
+make bootstrap
 chsh -s $(which zsh)
 ```
 
@@ -27,7 +31,7 @@ There's a few special files in the hierarchy.
 - **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
   available everywhere.
 - **Brewfile**: This is a list of applications for
-  [Homebrew Cask](http://caskroom.io) to install: things like Chrome and
+  Homebrew Cask to install: things like Chrome and
   Spotify and Atom and stuff. Might want to edit this file before running
   any initial setup.
 - **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your

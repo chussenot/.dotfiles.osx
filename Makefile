@@ -19,6 +19,10 @@ docker-image:
 	docker pull $(DOCKER_IMG)
 	$(BASH) -version
 
-.PHONY: test_ci clean install docker-image 
+bootstrap: ## Bootstrap your dotfiles configuration
+	script/bootstrap
 
+update: ## Update your dependencies
+	script/update
 
+.PHONY: test_ci clean install docker-image bootstrap update
