@@ -1,4 +1,4 @@
-# tmux cheat sheet
+# Tmux cheat sheet
 
 (C-x means ctrl+x, M-x means alt+x)
 
