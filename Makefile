@@ -4,9 +4,12 @@ BASH=docker run -v "${PWD}:/dotfiles" $(DOCKER_IMG) bash
 DOTFILES_INSTALL=/dotfiles/script/install
 DOTFILES_CMD=$(BASH) $(DOTFILES_INSTALL)
 
+help: ## Show this help.
+	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+
 test_ci: install
 
-clean:
+clean: ## Clean the log folder
 	rm -rf log/* || true
 
 install:	docker-image clean
@@ -17,3 +20,5 @@ docker-image:
 	$(BASH) -version
 
 .PHONY: test_ci clean install docker-image 
+
+
