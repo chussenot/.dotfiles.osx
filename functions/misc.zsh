@@ -33,33 +33,52 @@ function httpserver-ngrok() {
   ngrok http ${port}
 }
 
-function git-add-repo
-{
-    repo="$1"
-    dir="$(echo "$2" | sed 's/\/$//')"
-    path="$(pwd)"
+function git-add-repo {
+  repo="$1"
+  dir="$(echo "$2" | sed 's/\/$//')"
+  path="$(pwd)"
 
-    tmp="$(mktemp -d)"
-    remote="$(echo "$tmp" | sed 's/\///g'| sed 's/\./_/g')"
+  tmp="$(mktemp -d)"
+  remote="$(echo "$tmp" | sed 's/\///g'| sed 's/\./_/g')"
 
-    git clone "$repo" "$tmp"
-    cd "$tmp"
+  git clone "$repo" "$tmp"
+  cd "$tmp"
 
-    git filter-branch --index-filter '
-        git ls-files -s |
-        sed "s,\t,&'"$dir"'/," |
-        GIT_INDEX_FILE="$GIT_INDEX_FILE.new" git update-index --index-info &&
-        mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"
-    ' HEAD
+  git filter-branch --index-filter '
+      git ls-files -s |
+      sed "s,\t,&'"$dir"'/," |
+      GIT_INDEX_FILE="$GIT_INDEX_FILE.new" git update-index --index-info &&
+      mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE"
+  ' HEAD
 
-    cd "$path"
-    git remote add -f "$remote" "file://$tmp/.git"
-    git pull "$remote/master"
-    git merge --allow-unrelated-histories -m "Merge repo $repo into master" --edit "$remote/master"
-    git remote remove "$remote"
-    rm -rf "$tmp"
-  }
+  cd "$path"
+  git remote add -f "$remote" "file://$tmp/.git"
+  git pull "$remote/master"
+  git merge --allow-unrelated-histories -m "Merge repo $repo into master" --edit "$remote/master"
+  git remote remove "$remote"
+  rm -rf "$tmp"
+}
 
-  function generate_pass() {
-    openssl rand -base64 $1
-  }
+function generate_pass() {
+  openssl rand -base64 $1
+}
+
+function proxy_on() {
+  export http_proxy=http://awtran1:awtran1@cosmos2.mc2.renault.fr:3128
+  export HTTPS_PROXY=http://awtran1:awtran1@cosmos2.mc2.renault.fr:3128
+  export ALL_PROXY=http://awtran1:awtran1@cosmos2.mc2.renault.fr:3128
+  sudo networksetup -setwebproxystate Wi-fi on
+  sudo networksetup -setsecurewebproxystate Wi-fi on
+  sudo networksetup -setsocksfirewallproxystate Wi-fi on
+  echo -e "Cosmos Proxy ON"
+}
+
+function proxy_off() {
+  unset http_proxy
+  unset HTTPS_PROXY 
+  unset ALL_PROXY 
+  sudo networksetup -setwebproxystate Wi-fi off
+  sudo networksetup -setsecurewebproxystate Wi-fi off
+  sudo networksetup -setsocksfirewallproxystate Wi-fi off
+  echo -e "Cosmos Proxy OFF"
+}
