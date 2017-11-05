@@ -11,6 +11,8 @@ case $OS in
   'Linux')
     OS='Linux'
     alias ls='ls --color=auto'
+    apt-get update --yes
+    cat $ZSH/packages.txt | xargs sudo apt-get install --yes
     ;;
   'FreeBSD')
     OS='FreeBSD'

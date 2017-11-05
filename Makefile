@@ -1,7 +1,7 @@
 IMAGE_VER=latest
-DOCKER_IMG=yikaus/alpine-bash:$(IMAGE_VER)
-BASH=docker run -v "${PWD}:/dotfiles" $(DOCKER_IMG) bash
-DOTFILES_INSTALL=/dotfiles/script/install
+DOCKER_IMG=ubuntu:$(IMAGE_VER)
+BASH=docker run -v "${PWD}:/root/dotfiles" $(DOCKER_IMG) bash
+DOTFILES_INSTALL=/root/dotfiles/script/bootstrap
 DOTFILES_CMD=$(BASH) $(DOTFILES_INSTALL)
 
 help: ## Show this help.

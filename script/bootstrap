@@ -105,14 +105,18 @@ install_dotfiles () {
   done
 }
 
-install_dotfiles
+install_dependencies () {
+  info "installing dependencies"
+  if ./script/update > /tmp/dotfiles-dot 2>&1; then
+    success "dependencies installed"
+  else
+    cat /tmp/dotfiles-dot
+    fail "error installing dependencies"
+  fi
+}
 
-info "installing dependencies"
-if ./script/update > /tmp/dotfiles-dot 2>&1; then
-  success "dependencies installed"
-else
-  fail "error installing dependencies"
-fi
+install_dotfiles
+install_dependencies
 
 echo ''
 echo '  All installed!'
