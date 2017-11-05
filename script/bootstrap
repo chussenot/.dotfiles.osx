@@ -112,6 +112,7 @@ install_dependencies () {
   else
     cat /tmp/dotfiles-dot
     fail "error installing dependencies"
+    exit 1
   fi
 }
 
