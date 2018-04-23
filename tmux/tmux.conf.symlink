@@ -183,9 +183,9 @@ set-option -g @resurrect-processes 'ssh'
 set-option -g @resurrect-strategy-nvim 'session'
 
 # Enable tmux automatic start
-set-option -g @continuum-restore 'on'
+set-option -g @continuum-restore 'off'
 set-option -g @continuum-save-interval '10'
-set-option -g @continuum-boot 'on'
+set-option -g @continuum-boot 'off'
 set-option -g @continuum-boot-options 'iterm'
 set-option -g @scroll-speed-num-lines-per-scroll 2
 set-option -g @emulate-scroll-for-no-mouse-alternate-buffer 'on'
