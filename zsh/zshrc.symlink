@@ -79,6 +79,7 @@ PATH="$HOME/.dotfiles/bin:$PATH"
 # The original version is saved in .zprofile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.tgenv/bin:$PATH"
 export PATH
 
 # Source private commands
@@ -99,4 +100,5 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
 fi
-export PATH="$HOME/.tgenv/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
