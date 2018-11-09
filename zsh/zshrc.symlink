@@ -103,3 +103,5 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.autoenv/activate.sh
+
+eval "$(direnv hook zsh)"
